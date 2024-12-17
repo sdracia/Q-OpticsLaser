@@ -142,10 +142,10 @@ def cross_sections(image, plot=False, verbose=False):
     fitted_horizontal = gaussian(x_horizontal, *popt_horizontal)
     fitted_vertical = gaussian(x_vertical, *popt_vertical)
 
-    plt.figure(figsize=(12, 6))
+    plt.figure(figsize=(6, 12))
 
     # Horizontal cross-section
-    plt.subplot(1, 2, 1)
+    plt.subplot(2, 1, 1)
     plt.plot(x_horizontal, horizontal, label="Horizontal data", color="orange")
     plt.plot(x_horizontal, fitted_horizontal, label="Gaussian fit", color="red", linestyle="--")
     plt.title("Horizontal cross-section")
@@ -154,7 +154,7 @@ def cross_sections(image, plot=False, verbose=False):
     plt.legend()
 
     # Vertical cross-section
-    plt.subplot(1, 2, 2)
+    plt.subplot(2, 1, 2)
     plt.plot(x_vertical, vertical, label="Vertical data", color="cyan")
     plt.plot(x_vertical, fitted_vertical, label="Gaussian fit", color="red", linestyle="--")
     plt.title("Vertical cross-section")
@@ -269,7 +269,7 @@ def fit_beam_radii(images, z_positions, lens = False, plot=False):
   if plot:  
     # Plot the results
     plt.figure(figsize=(10, 6))
-    plt.scatter(z_positions, beam_radii, color="orange", label="Computed beam radii")
+    plt.scatter(z_positions, beam_radii, color="red", label="Computed beam radii")
     z_fit = np.linspace(min(z_positions), max(z_positions), 500)
     
     if not lens:
@@ -277,7 +277,7 @@ def fit_beam_radii(images, z_positions, lens = False, plot=False):
       plt.plot(z_fit, W_fit, color="red", label=f"Fit: $W_0$={W0:.4f} ± {W0_err:.4f}, $z_R$={zR:.2f} ± {zR_err:.2f}")
     else:
       W_fit = gaussian_beam_model_with_lens(z_fit, W0, zR, f)
-      plt.plot(z_fit, W_fit, color="blue", label=f"Fit: $W_0$={W0:.4f} ± {W0_err:.4f},\n$z_R$={zR:.4f} ± {zR_err:.4f}, $f$={f:.4f} ± {f_err:.4f}")
+      plt.plot(z_fit, W_fit, color="blue", label=f"Fit: $f$={f:.4f} ± {f_err:.4f}")
 
     plt.xlabel("z (position) [cm]")
     plt.ylabel("W(z) (beam radius) [cm]")
