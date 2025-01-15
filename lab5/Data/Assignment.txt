@@ -1,0 +1,40 @@
+ASSIGNMENT
+
+The QKD protocol used is the 3-state 1-decoy efficient BB84 protocol described in [1].
+The transmitter (Alice) send the state a encoded in the base A={X,Z}. In particular, a={H,V} if A=Z and a=D if A=X.
+The receiver (Bob) chooses the measurement base B={X,Z} and can obtain the state b={H,V} if B=Z or b={D,A} if B={X}.
+
+In order to characterize the QKD system, you need to estimate the following quantities:
+- The probability that the transmitter encodes in the base X, prob(A=X)
+- The probability that the transmitter encodes in the base Z, prob(A=Z)
+- The probability that the receiver chooses the base X, prob(B=X)
+- The probability that the receiver chooses the base Z, prob(B=Z)
+- All the possible conditioned probabilities at the receiver, prob(b|a) where b={H,V,D,A} and a={H,V,D}
+- The Quantum Bit Error Rate (QBER) achieved in the state H, prob(a!=b|a=H)
+- The Quantum Bit Error Rate (QBER) achieved in the state V, prob(a!=b|a=V)
+- The Quantum Bit Error Rate (QBER) achieved in the state D, prob(a!=b|a=D)
+- The Quantum Bit Error Rate (QBER) achieved in the base X, prob(a!=b|A=X, B=X)
+- The Quantum Bit Error Rate (QBER) achieved in the base Z, prob(a!=b|A=Z, B=Z)
+- The probability that the decoy state is the low intensity state, prob(decoy=low)
+- The probability that the decoy state is the high intensity state, prob(decoy=high)
+
+You can find the experimental data of the transmitter and receiver in the files "states.txt" and "statesRCV.txt", respectively.
+The "no-detections" events due to the channel attenuation are already discarded, hence you have a direct correspondece between what the transmitter has sent and the related measurement of the receiver.
+
+Data are saved as follows: 
+- states.txt. Here the transmitted states are saved. The states are encoded as H = '00', V = '01', D = '10', A = '11', and they are embedded into 8 bit. For example, the state D is saved as '00000010'. This file must be read byte by byte. 
+- statesRCV.txt. Here the received states are saved. The encoding is the same as states.txt. This file must be read byte by byte.
+- decoy.txt. Here the encoded decoys are saved. The decoy levels are encoded as null = '00', low = '01', high = '10', and they are embedded into 8 bit. For example, the decoy high is saved as '00000010'. This file must be read byte by byte (you should not find any null decoy).
+
+Facultative:
+Let's suppose that you have a perfect channel which does not introduce any errors, which means prob(a=b|A=B)=1 and prob(b=D|A=Z)=prob(b=A|A=Z)=prob(b=H|A=X)=prob(b=V|A=X)=0.5.
+An eavesdropper intercepts the photons along the channel fiber and he measures with the same probabilities of Bob in the base E={X,Z}. 
+After the measurement, he sends to Bob the state e measured by him. What are the QBERs experienced by Alice and Bob in this intercept and resend attack? Is our system secure against this type of attack?
+
+If you have any questions, please ask. Good work!
+ 
+Contact information:
+mattia.sabatini@phd.unipd.it
+ 
+BIBLIOGRAPHY
+[1] Davide Rusca, Alberto Boaron, Fadri Grünenfelder, Anthony Martin, and Hugo Zbinden , "Finite-key analysis for the 1-decoy state QKD protocol", Appl. Phys. Lett. 112, 171104 (2018) https://doi.org/10.1063/1.5023340
